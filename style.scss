@@ -1,0 +1,39 @@
+@mixin ring ($size, $color) {
+    border: $size/10 +rem solid $color;
+    border-radius: 50%;
+    width: $size + rem;
+    height: $size + rem;
+    box-shadow: $size/20+rem $size/20+rem 5px darken($color, 20%), inset $size/20+rem $size/20+rem 5px darken($color, 20%);
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.ring {
+    &-little {
+        @include ring(2, orange);
+    }
+    &-big {
+        @include ring(5, yellow);
+    }
+}
+
+.rings {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+@for $i from 1 through 6 {
+    .ring:nth-child(#{$i}) {
+        @include ring( $i, red);
+        position: relative;
+        right: $i*$i/5 + rem;
+    }
+}
